@@ -1,0 +1,13 @@
+Components
+    Inputs/Form Controls
+    Layout
+    Navigatio
+    Data display and feedback
+    MUI Lab    
+MUI Customization
+Install MUI
+
+npx create-react-app react-mui-demo --template typescript
+
+Installing MUI
+npm install @mui/material @emotion/react @emotion/styled
