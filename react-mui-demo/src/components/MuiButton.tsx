@@ -1,15 +1,13 @@
-import { Button } from "@mui/material";
+import { Button, Stack } from "@mui/material";
 import React from "react";
 
 const MuiButton = () => {
   return (
-    <div>
-      <Button variant="text">Text</Button> {/* Less Important */}
-      <Button variant="contained">Contained</Button>{" "}
-      {/* More Important such as action button like Login/Register/Submit */}
-      <Button variant="outlined">Outlined</Button>{" "}
-      {/* Less Important similar to cancel or go back*/}
-    </div>
+    <Stack spacing={2} direction="row">
+      <Button variant="text">Text</Button>
+      <Button variant="contained">Contained</Button>
+      <Button variant="outlined">Outlined</Button>
+    </Stack>
   );
 };
 
