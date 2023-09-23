@@ -7,7 +7,13 @@ Components
 MUI Customization
 Install MUI
 
+Commands
+    Shift + Alt + Down arrow  -> Duplicating the line of content to next line
+
 npx create-react-app react-mui-demo --template typescript
 
 Installing MUI
 npm install @mui/material @emotion/react @emotion/styled
+
+Typography
+    The style and apperance of your website
