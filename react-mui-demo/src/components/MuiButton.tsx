@@ -33,6 +33,17 @@ const MuiButton = () => {
           Success
         </Button>
       </Stack>
+      <Stack spacing={2} direction="column">
+        <Button variant="contained" size="small">
+          small
+        </Button>
+        <Button variant="contained" size="medium">
+          medium
+        </Button>
+        <Button variant="contained" size="large">
+          large
+        </Button>
+      </Stack>
     </Stack>
   );
 };
