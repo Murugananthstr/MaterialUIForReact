@@ -17,3 +17,7 @@ npm install @mui/material @emotion/react @emotion/styled
 
 Typography
     The style and apperance of your website
+
+Installing Material UI Icons
+
+npm install @mui/icons-material
