@@ -21,3 +21,7 @@ Typography
 Installing Material UI Icons
 
 npm install @mui/icons-material
+
+npm install @mui/material @emotion/react @emotion/styled
+
+install react-router-dom
