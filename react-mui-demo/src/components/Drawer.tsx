@@ -16,10 +16,11 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
-import InboxIcon from "@mui/icons-material/MoveToInbox";
-import MailIcon from "@mui/icons-material/Mail";
 import { Link } from "react-router-dom";
 import SendIcon from "@mui/icons-material/Send";
+import ButtonIcon from "@mui/icons-material/TouchApp"; // Replace with the actual import for your Button icon
+import TypographyIcon from "@mui/icons-material/TextFormat"; // Replace with the actual import for your Typography icon
+import { useLocation } from "react-router-dom";
 
 const drawerWidth = 240;
 
@@ -38,9 +39,9 @@ const closedMixin = (theme: Theme): CSSObject => ({
     duration: theme.transitions.duration.leavingScreen,
   }),
   overflowX: "hidden",
-  width: `calc(${theme.spacing(7)} + 1px)`,
+  width: `calc(${theme.spacing(7)} - 3px)`,
   [theme.breakpoints.up("sm")]: {
-    width: `calc(${theme.spacing(8)} + 1px)`,
+    width: `calc(${theme.spacing(8)} - 3px)`,
   },
 });
 
@@ -95,6 +96,7 @@ const Drawer = styled(MuiDrawer, {
 export default function MiniDrawer() {
   const theme = useTheme();
   const [open, setOpen] = React.useState(false);
+  const location = useLocation();
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -102,6 +104,23 @@ export default function MiniDrawer() {
 
   const handleDrawerClose = () => {
     setOpen(false);
+  };
+
+  const getTextColor = (backgroundColor: string) => {
+    // Use a simple luminance check to determine if the text should be dark or light
+    const luminance =
+      0.299 * parseInt(backgroundColor.slice(1, 3), 16) +
+      0.587 * parseInt(backgroundColor.slice(3, 5), 16) +
+      0.114 * parseInt(backgroundColor.slice(5, 7), 16);
+
+    return luminance > 128
+      ? theme.palette.text.primary
+      : theme.palette.text.secondary;
+  };
+
+  const isActiveLink = (path: string) => {
+    // Compare the current location with the link's path
+    return location.pathname === path;
   };
 
   return (
@@ -139,50 +158,85 @@ export default function MiniDrawer() {
         </DrawerHeader>
         <Divider />
         <List>
-          <Link to="/buttons">
-            <ListItem key="Button" disablePadding sx={{ display: "block" }}>
+          <Link to="/buttons" style={{ textDecoration: "none" }}>
+            <ListItem
+              key="Button"
+              disablePadding
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                // borderRadius: "8px",
+                boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.1)",
+                transition: "background-color 0.3s, transform 0.2s",
+                "&:hover": {
+                  backgroundColor: "#f5f5f5", // Change to your preferred hover color
+                  transform: "scale(1.02)",
+                },
+                backgroundColor: isActiveLink("/buttons")
+                  ? "#d7d7d7"
+                  : "transparent", // Highlight active link
+                color: getTextColor(
+                  isActiveLink("/buttons") ? "#e0e0e0" : "transparent"
+                ), // Dynamically set text color
+              }}
+            >
               <ListItemButton
                 sx={{
                   minHeight: 48,
-                  justifyContent: open ? "initial" : "center",
                   px: 2.5,
                 }}
               >
                 <ListItemIcon
                   sx={{
                     minWidth: 0,
-                    mr: open ? 3 : "auto",
-                    justifyContent: "center",
+                    mr: 2,
                   }}
                 >
-                  <InboxIcon />
+                  <ButtonIcon />{" "}
+                  {/* Use the icon you prefer for the Button item */}
                 </ListItemIcon>
-                <ListItemText primary="Button" sx={{ opacity: open ? 1 : 0 }} />
+                <ListItemText primary="Button" />
               </ListItemButton>
             </ListItem>
           </Link>
-          <Link to="/blogs">
-            <ListItem key="Typography" disablePadding sx={{ display: "block" }}>
+          <Link to="/blogs" style={{ textDecoration: "none" }}>
+            <ListItem
+              key="Typography"
+              disablePadding
+              sx={{
+                display: "flex",
+                alignItems: "center",
+                // borderRadius: "8px",
+                boxShadow: "0px 2px 4px rgba(0, 0, 0, 0.1)",
+                transition: "background-color 0.3s, transform 0.2s",
+                "&:hover": {
+                  backgroundColor: "#f5f5f5", // Change to your preferred hover color
+                  transform: "scale(1.02)",
+                },
+                backgroundColor: isActiveLink("/blogs")
+                  ? "#d7d7d7"
+                  : "transparent", // Highlight active link
+                color: getTextColor(
+                  isActiveLink("/blogs") ? "#e0e0e0" : "transparent"
+                ), // Dynamically set text color
+              }}
+            >
               <ListItemButton
                 sx={{
                   minHeight: 48,
-                  justifyContent: open ? "initial" : "center",
                   px: 2.5,
                 }}
               >
                 <ListItemIcon
                   sx={{
                     minWidth: 0,
-                    mr: open ? 3 : "auto",
-                    justifyContent: "center",
+                    mr: 2,
                   }}
                 >
-                  <InboxIcon />
+                  <TypographyIcon />
+                  {/* Use the icon you prefer for the Typography item */}
                 </ListItemIcon>
-                <ListItemText
-                  primary="Typography"
-                  sx={{ opacity: open ? 1 : 0 }}
-                />
+                <ListItemText primary="Typography" />
               </ListItemButton>
             </ListItem>
           </Link>
